@@ -20,17 +20,17 @@ public class UserController {
     }
 
     @GetMapping()
-    public ResponseEntity<BaseResponse> getUsers() {
+    public ResponseEntity<BaseResponse<List<ResponseUserDto>>> getUsers() {
         List<ResponseUserDto> users = userService.getAllUsers();
-        BaseResponse body = new BaseResponse(true, "OK", users);
-        return ResponseEntity.ok(body);
+        BaseResponse<List<ResponseUserDto>> response = BaseResponse.<List<ResponseUserDto>>builder().success(true).message("OK").data(users).build();
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BaseResponse> getUsersById(@PathVariable String id) {
+    public ResponseEntity<BaseResponse<ResponseUserDto>> getUsersById(@PathVariable String id) {
         ResponseUserDto user = userService.getUserById(id);
-        BaseResponse body = new BaseResponse(true, "OK", user);
-        return ResponseEntity.ok(body);
+        BaseResponse<ResponseUserDto> response = BaseResponse.<ResponseUserDto>builder().success(true).message("OK").data(user).build();
+        return ResponseEntity.ok(response);
     }
 
 }

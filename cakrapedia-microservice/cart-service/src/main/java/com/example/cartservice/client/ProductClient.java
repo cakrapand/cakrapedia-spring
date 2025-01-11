@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @FeignClient(value = "product", url = "http://localhost:8081")
 public interface ProductClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "api/v1/products/hello")
-    ResponseEntity<BaseResponse> hello();
-
+    @RequestMapping(method = RequestMethod.GET, value = "api/v1/products/helloFromProduct")
+    ResponseEntity<BaseResponse<String>> helloFromProduct();
 }

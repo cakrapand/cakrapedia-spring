@@ -19,16 +19,16 @@ public class CartController {
     }
 
     @GetMapping()
-    public ResponseEntity<BaseResponse> getAllCarts() {
+    public ResponseEntity<BaseResponse<List<ResponseCartDto>>> getAllCarts() {
         List<ResponseCartDto> carts = cartService.getAllCarts();
-        BaseResponse response = BaseResponse.builder().success(true).message("OK").data(carts).build();
+        BaseResponse<List<ResponseCartDto>> response = BaseResponse.<List<ResponseCartDto>>builder().success(true).message("OK").data(carts).build();
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BaseResponse> getCartById(@PathVariable("id") String id) {
+    public ResponseEntity<BaseResponse<ResponseCartDto>> getCartById(@PathVariable("id") String id) {
         ResponseCartDto cart = cartService.getCartById(id);
-        BaseResponse response = BaseResponse.builder().success(true).message("OK").data(cart).build();
+        BaseResponse<ResponseCartDto> response = BaseResponse.<ResponseCartDto>builder().success(true).message("OK").data(cart).build();
         return ResponseEntity.ok(response);
     }
 
@@ -39,10 +39,10 @@ public class CartController {
 //        return ResponseEntity.ok(response);
 //    }
 
-    @GetMapping("/hello")
-    public ResponseEntity<BaseResponse> hello() {
-        String hello = cartService.hello();
-        BaseResponse response = BaseResponse.builder().success(true).message("OK").data(hello).build();
+    @GetMapping("/helloFromCart")
+    public ResponseEntity<BaseResponse<String>> hello() {
+        String hello = cartService.helloFromCart();
+        BaseResponse<String> response = BaseResponse.<String>builder().success(true).message("OK").data(hello).build();
         return ResponseEntity.ok(response);
     }
 }

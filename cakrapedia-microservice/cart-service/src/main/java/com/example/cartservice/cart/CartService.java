@@ -41,9 +41,12 @@ public class CartService {
         return mapToResponseCartDto(newCart);
     }
 
-    public String hello(){
-        ResponseEntity<BaseResponse> response = productClient.hello();
-        return "Helow";
+    public String helloFromCart(){
+        ResponseEntity<BaseResponse<String>> response = productClient.helloFromProduct();
+        if(response.getBody() == null){
+            throw new RuntimeException();
+        }
+        return response.getBody().getData();
     }
 
     private ResponseCartDto mapToResponseCartDto(Cart cart) {

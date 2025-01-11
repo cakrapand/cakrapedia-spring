@@ -22,16 +22,16 @@ public class OrderController {
     }
 
     @GetMapping()
-    public ResponseEntity<BaseResponse> getAllOrders() {
+    public ResponseEntity<BaseResponse<List<ResponseOrderDto>>> getAllOrders() {
         List<ResponseOrderDto> products = orderService.getAllOrders();
-        BaseResponse response = BaseResponse.builder().success(true).message("OK").data(products).build();
+        BaseResponse<List<ResponseOrderDto>> response = BaseResponse.<List<ResponseOrderDto>>builder().success(true).message("OK").data(products).build();
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BaseResponse> getOrderById(@PathVariable("id") String id) {
+    public ResponseEntity<BaseResponse<ResponseOrderDto>> getOrderById(@PathVariable("id") String id) {
         ResponseOrderDto product = orderService.getOrderById(id);
-        BaseResponse response = BaseResponse.builder().success(true).message("OK").data(product).build();
+        BaseResponse<ResponseOrderDto> response = BaseResponse.<ResponseOrderDto>builder().success(true).message("OK").data(product).build();
         return ResponseEntity.ok(response);
     }
 }
